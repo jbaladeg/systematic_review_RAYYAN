@@ -1,5 +1,13 @@
 # Systematic review and RAYYAN exportation
 
+
+1. [What is Rayyan?](#what-is-rayyan)
+2. [Belur Approach](#belur-approach)
+3. [articles.csv](#articlescsv)
+4. [Agreement Indices](#agreement-indices)
+5. [The Structure of the Script](#the-structure-of-the-script)
+
+
 Rayyan is a key tool for the early stages of systematic reviews and/or meta-analyses. This repository focuses on adapting its export from the official website to analyze judge relationships and calculate initial agreement indices
 
 ## What is Rayyan? https://www.rayyan.ai/
@@ -50,4 +58,11 @@ As a bonus, we also need to consider which indices we should use when calculatin
 
 ## The struture of the script
 
-
+0. Load the necessary libraries  
+1. Open the directory  
+2. Read the file  
+3. Prepare the dataset with the variables we need. Identify and separate the inclusion variables and the labels with the blocks  
+4. Prepare the decision variables  
+5. Convert decisions to numeric values  
+6. Filter based on the block you want to analyze  
+7. Calculate agreement indices based on the number of judges
