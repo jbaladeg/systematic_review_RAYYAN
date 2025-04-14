@@ -40,7 +40,7 @@ horrible, isn't it?
 The aim of this repository is transforming this horrible data in this beautiful order:
 
 ```
-     Blocks     Loren     Kim    Carlos  Loren_n    Kim_n  Carlos_n
+     Blocks     rater1  rater2   rater3  rater1_n   rater2_n  rater 3_n
 1       <NA> Excluded     <NA> Excluded       0         NA       0
 2       <NA> Excluded     <NA> Excluded       0         NA       0
 3       <NA> Excluded     <NA> Excluded       0         NA       0
