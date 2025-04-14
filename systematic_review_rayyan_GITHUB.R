@@ -123,3 +123,37 @@ ggplot(df_pie, aes(x = "", y = frequency, fill = agreement)) +
   theme_void() +
   labs(title = "Agreement between raters") +
   scale_fill_manual(values = c("lightgreen", "tomato", "lightblue"))
+
+#chart form 3 (more detailed)
+
+bd_filter$detailed_agreement <- apply(bd_filter[, c("rater1_n", "rater2_n", "rater3_n")], 1, function(x) {
+  x <- na.omit(x)
+  if (length(x) < 2) {
+    return("No evaluated")
+  }
+  n_unique <- length(unique(x))
+  if (n_unique == 1) {
+    return("total agreement")
+  } else if (n_unique == 2) {
+    return("Majority 2 of 3")
+  } else {
+    return("total disagreement")
+  }
+})
+
+detailed_table <- table(bd_filter$detailed_agreement)
+df_pie <- as.data.frame(detailed_table)
+colnames(df_pie) <- c("agreement", "frequency")
+
+#calculate the percentage
+df_pie$percentage <- round(100 * df_pie$frequency / sum(df_pie$frequency), 1)
+df_pie$label <- paste0(df_pie$agreement, "\n", df_pie$percentage, "%")
+
+ggplot(df_pie, aes(x = "", y = frequency, fill = agreement)) +
+  geom_bar(stat = "identity", width = 1, color = "white") +
+  coord_polar("y") +
+  theme_void() +
+  labs(title = "Agreement between raters") +
+  geom_text(aes(label = label), 
+            position = position_stack(vjust = 0.5), size = 4) +
+  scale_fill_manual(values = c("lightgreen", "gold", "tomato", "grey80"))
