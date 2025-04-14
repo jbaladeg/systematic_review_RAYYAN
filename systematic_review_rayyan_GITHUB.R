@@ -11,13 +11,13 @@ library(stringr)
 
 
 #BLOQUE 1 / BLOCK 1----
-#1.Open directory (Control + Mayus + H)
-#2. find the file and read the base
+#1.Open directory (Control + Mayus + H) ----
+#2. find the file and read the base ----
 dir()
 bd <- as.data.frame(read.csv('articles_github.csv'))
 
 View(bd)
-#3. Prepare the base
+#3. Prepare the base ----
 
 bd <- bd[,c("key","notes")] #I just want to use these variables
 
@@ -55,7 +55,7 @@ bd$rater3    <- sapply(bd$rayyan_inclusion, extraer_decision, nombre = "rater3")
 nv(bd)
 bd[,5:7]#check
 
-#5. I change the included by 1 and the excluded by 0
+#5. I change the included by 1 and the excluded by 0 ----
 bd$rater1_n    <- ifelse(is.na(bd$rater1), NA, ifelse(bd$rater1 == "Included", 1, 0))
 bd$rater2_n <- ifelse(is.na(bd$rater2), NA, ifelse(bd$rater2 == "Included", 1, 0))
 bd$rater3_n    <- ifelse(is.na(bd$rater3), NA, ifelse(bd$rater3 == "Included", 1, 0))
@@ -63,11 +63,11 @@ bd$rater3_n    <- ifelse(is.na(bd$rater3), NA, ifelse(bd$rater3 == "Included", 1
 
 bd[,4:10]#check
 
-#6. filter per block 1
+#6. filter per block 1 ----
 
 bd_filter <- subset(bd, blocks == "bloque 1")
 
-#7. ICC bloque 1
+#7. ICC - Block 1 ----
 
 with(bd_filter, table(rater1_n, rater2_n, rater3_n))
 
@@ -89,3 +89,37 @@ irr::kappam.fleiss(decision)
 #0.40 - 0.59	Moderate
 #0.60 - 0.74	Good
 #0.75 - 1.00	Excelnt
+
+    #In this case, the agreement was poor
+
+#8. Charts ----
+
+#chart form 1 
+bd_filter$agreement <- apply(bd_filter[, c("rater1_n", "rater2_n", "rater3_n")], 1, function(x) {
+  x <- na.omit(x)
+  if(length(x) < 2) {
+    return("No evaluated")  # one, two or nobody
+  } else if(length(unique(x)) == 1) {
+    return("AGRE") #agreement
+  } else {
+    return("DISA") #disagreement
+  }
+})
+
+agreement_table <- table(bd_filter$agreement); agreement_table
+pie(agreement_table,
+    col = c("lightgreen", "tomato", "lightblue"),
+    main = "Grado de acuerdo entre evaluadores")
+
+nv(bd)
+
+#chart form 2 (more aesthetic :) )
+df_pie <- as.data.frame(agreement_table)
+colnames(df_pie) <- c("agreement", "frequency")
+
+ggplot(df_pie, aes(x = "", y = frequency, fill = agreement)) +
+  geom_bar(stat = "identity", width = 1) +
+  coord_polar("y") +
+  theme_void() +
+  labs(title = "Agreement between raters") +
+  scale_fill_manual(values = c("lightgreen", "tomato", "lightblue"))
