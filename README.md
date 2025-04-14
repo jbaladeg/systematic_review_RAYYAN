@@ -56,6 +56,11 @@ As a bonus, we also need to consider which indices we should use when calculatin
 
 ![image](https://github.com/user-attachments/assets/a591aa9a-7306-4c45-8632-1273a12c7471)
 
+At the same time, we can visualize the degree of agreement and disagreement among the evaluators with two different charts:
+
+![image](https://github.com/user-attachments/assets/c23ef090-d2a5-4844-afec-6a0e5fd4eac5)
+
+
 ## The struture of the script
 
 0. Load the necessary libraries  
@@ -66,3 +71,4 @@ As a bonus, we also need to consider which indices we should use when calculatin
 5. Convert decisions to numeric values  
 6. Filter based on the block you want to analyze  
 7. Calculate agreement indices based on the number of judges
+8. Charts
