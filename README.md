@@ -56,10 +56,8 @@ As a bonus, we also need to consider which indices we should use when calculatin
 
 ![image](https://github.com/user-attachments/assets/a591aa9a-7306-4c45-8632-1273a12c7471)
 
-At the same time, we can visualize the degree of agreement and disagreement among the evaluators with two different charts:
-
-![image](https://github.com/user-attachments/assets/c23ef090-d2a5-4844-afec-6a0e5fd4eac5)
-
+At the same time, we can visualize the degree of agreement and disagreement among the evaluators with three different charts:
+![Captura de pantalla 2025-04-14 11 26 50](https://github.com/user-attachments/assets/7bbe5b6d-8080-484f-abe1-1e5978151fc3)
 
 ## The struture of the script
 
