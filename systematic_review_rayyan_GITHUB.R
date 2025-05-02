@@ -65,11 +65,16 @@ bd[,4:10]#check
 
 #6. filter per block 1 ----
 
-bd_filter <- subset(bd, blocks == "bloque 1")
+bd_filter <- subset(bd, bloques == "bloque 1")
 
 #7. ICC - Block 1 ----
 
 with(bd_filter, table(rater1_n, rater2_n, rater3_n))
+
+#frecuency of inclusions and exclusions!
+table(bd_filter$rater1_n)
+table(bd_filter$rater2_n)
+table(bd_filter$rater3_n)
 
 
 #form 1 = ICC (in general)
